@@ -1,4 +1,7 @@
 
+using EFDB.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace EFDB
 {
     public class Program
@@ -6,7 +9,8 @@ namespace EFDB
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-
+            builder.Services.AddDbContext<AppDBContext>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DBConnection")));
             // Add services to the container.
 
             builder.Services.AddControllers();
